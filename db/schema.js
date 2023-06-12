@@ -20,6 +20,15 @@ type Producto{
    precio:Float
    creado:String
 }
+type Cliente {
+   id:ID
+   nombre:String
+   apellido:String
+   empresa:String
+   email:String
+   telefono:String
+   vendedor:ID
+}
 input UsuarioInput{
    nombre:String!
    apellido:String!
@@ -35,12 +44,25 @@ input ProductoInput{
    existencia:Int!
    precio:Float
 }
+input ClienteInput{
+   nombre:String!
+   apellido:String!
+   empresa:String!
+   email:String!
+telefono:String
+}
  type Query{
    #Usuarios get
     obtenerUsuario(token:String!):Usuario
     #Productos get
     obtenerProductos:[Producto]
     obtenerProducto(id:ID!):Producto
+
+    #clientes
+   obtenerClientes:[Cliente]
+   obtenerClientesVendedor:[Cliente]
+   obtenerCliente(id:ID!):Cliente
+
  }
  type Mutation{
    #Usuarios
@@ -50,6 +72,10 @@ input ProductoInput{
    nuevoProducto(input:ProductoInput):Producto
    actualizarProducto(id:ID!, input:ProductoInput):Producto
    eliminarProducto(id:ID!):String
+   #clientes
+   nuevoCliente(input:ClienteInput):Cliente
+   actualizarCliente(id:ID!,input:ClienteInput):Cliente
+   eliminarCliente(id:ID!):String
  }
 
 `;
